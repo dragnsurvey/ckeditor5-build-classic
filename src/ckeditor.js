@@ -6,6 +6,13 @@
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
+import Font from '@ckeditor/ckeditor5-font/src/font';
+import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
+import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/base64uploadadapter';
+import CustomElementPlugin from 'ckeditor5-custom-element/src/customelement';
+import IconCalculator from '../assets/icons/calculator.svg';
+
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
@@ -28,10 +35,16 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 
-export default class ClassicEditor extends ClassicEditorBase {}
+export default class ClassicEditor extends ClassicEditorBase {
+}
 
 // Plugins to include in the build.
 ClassicEditor.builtinPlugins = [
+	CustomElementPlugin,
+	Base64UploadAdapter,
+	Alignment,
+	Font,
+	RemoveFormat,
 	Essentials,
 	UploadAdapter,
 	Autoformat,
@@ -63,6 +76,7 @@ ClassicEditor.defaultConfig = {
 			'|',
 			'bold',
 			'italic',
+			'alignment',
 			'link',
 			'bulletedList',
 			'numberedList',
@@ -70,16 +84,27 @@ ClassicEditor.defaultConfig = {
 			'blockQuote',
 			'insertTable',
 			'mediaEmbed',
+			'fontSize',
+			'fontColor',
+			'fontBackgroundColor',
 			'undo',
-			'redo'
+			'redo',
+			'removeFormat'
 		]
 	},
 	image: {
 		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
+			'imageStyle:alignLeft',
+			'imageStyle:alignCenter',
+			'imageStyle:alignRight',
 			'|',
 			'imageTextAlternative'
+		],
+		styles: [
+
+			'alignLeft',
+			'alignCenter',
+			'alignRight'
 		]
 	},
 	table: {
@@ -87,6 +112,16 @@ ClassicEditor.defaultConfig = {
 			'tableColumn',
 			'tableRow',
 			'mergeTableCells'
+		]
+	},
+
+	CustomElement: {
+		items: [
+			{
+				tag: 'dns-element', placeholder: '@calculator',
+				attributes: {name: 'calculator'}, icon: IconCalculator,
+				inline: true, editable: false
+			}
 		]
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.

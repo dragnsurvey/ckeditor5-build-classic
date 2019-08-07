@@ -86,5 +86,11 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "@ckeditor/ckeditor5-alignment": "^11.1.3",
+    "@ckeditor/ckeditor5-font": "^11.2.1",
+    "@ckeditor/ckeditor5-remove-format": "^10.0.3",
+    "ckeditor5-custom-element": "https://github.com/dragnsurvey/ckeditor5-custom-element/tarball/33ea73681f27560df66b4f4e50fe2e0b6fcad704"
   }
 }
